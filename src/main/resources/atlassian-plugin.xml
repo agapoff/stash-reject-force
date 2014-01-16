@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="stash-reject-force"/>
+  <!-- add our web resources -->
+  <web-resource key="stash-reject-force-resources" name="stash-reject-force Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <resource type="download" name="stash-reject-force.css" location="/css/stash-reject-force.css"/>
+    <resource type="download" name="stash-reject-force.js" location="/js/stash-reject-force.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>stash-reject-force</context>
+  </web-resource>
+  <!-- import from the product container -->
+  <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
+  <repository-hook name="Reject Force Pre Receive Hook" i18n-name-key="reject-force-pre-receive-hook.name" key="reject-force-pre-receive-hook" class="com.example.stash.hook.RejectForcePreReceiveHook">
+    <description key="reject-force-pre-receive-hook.description">The Reject Force Pre Receive Hook Plugin</description>
+    <icon>images/vader.png</icon>
+        <config-form name="Simple Hook Config" key="simpleHook-config">
+            <view>stash.config.panbet.rejectforce.hook.simple.formContents</view>
+            <directory location="/static/"/>
+        </config-form>
+        <validator>com.example.stash.hook.RefValidator</validator>
+  </repository-hook>
+</atlassian-plugin>

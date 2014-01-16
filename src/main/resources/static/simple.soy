@@ -1,0 +1,28 @@
+{namespace stash.config.panbet.rejectforce.hook.simple}
+
+/**
+ * @param config
+ * @param? errors
+ */
+{template .formContents}
+    {call aui.form.textField}
+        {param id: 'ref-ids-regex' /}
+        {param value: $config['ref-ids-regex'] /}
+        {param labelContent}
+            {stash_i18n('stash.web.test.hook.config.label', 'Ref Pattern')}
+        {/param}
+        {param descriptionText: stash_i18n('stash.web.test.hook.config.description', 'Regular expression identifying those refs forced pushes are prohibited. If no expression is provided forced pushed to all refs of the repository are prohibited. Refs have to be provided like "refs/heads/master".') /}
+        {param extraClasses: 'long' /}
+        {param errorTexts: $errors ? $errors['ref-ids-regex'] : null /}
+    {/call}
+    {call aui.form.textField}
+        {param id: 'force-pushers' /}
+        {param value: $config['force-pushers'] /}
+        {param labelContent}
+            {stash_i18n('stash.web.test.hook.config.projectkey', 'Force Pushers')}
+        {/param}
+        {param descriptionText: stash_i18n('stash.web.test.hook.config.pushers.description', 'Comma separated list of users allowed to make push --force to this repository') /}
+        {param extraClasses: 'long' /}
+        {param errorTexts: $errors ? $errors['force-pushers'] : null /}
+    {/call}
+{/template}
